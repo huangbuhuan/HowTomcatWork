@@ -29,7 +29,7 @@ public class Request {
             i = -1;
         }
         for (int j = 0; j < i; j++) {
-            request.append((char) buffer[i]);
+            request.append((char) buffer[j]);
         }
         System.out.println(request.toString());
         uri = parseUri(request.toString());
@@ -41,7 +41,7 @@ public class Request {
         if (index1 != -1) {
             index2 = requestString.indexOf(' ', index1 + 1);
             if (index2 > index1) {
-                return requestString.substring(index1, index2);
+                return requestString.substring(index1 + 1, index2);
             }
         }
         return null;

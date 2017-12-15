@@ -45,7 +45,7 @@ public class HttpServer {
                 Request request = new Request(input);
                 request.parse();
                 Response response = new Response(output);
-                response.serRequest(request);
+                response.setRequest(request);
                 response.sendStaticResource();
                 socket.close();
                 shutdown = request.getUri().equals(SHUTDOWN_COMMAD);

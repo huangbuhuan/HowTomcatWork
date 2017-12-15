@@ -19,7 +19,7 @@ public class Response {
         this.output = output;
     }
     
-    public void serRequest(Request request) {
+    public void setRequest(Request request) {
         this.request = request;
     }
     
