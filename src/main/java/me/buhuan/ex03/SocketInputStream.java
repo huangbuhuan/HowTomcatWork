@@ -11,6 +11,7 @@ import java.io.InputStream;
 public class SocketInputStream extends InputStream {
    
     private InputStream inputStream;
+    
     private int bufferSize;
     
     public SocketInputStream(InputStream inputStream, int bufferSize) {
@@ -26,9 +27,8 @@ public class SocketInputStream extends InputStream {
         return "";
     }
     
-    public String readHeader(HttpHeader httpHeader) {
-        
-        return "";
+    public boolean readHeader(HttpHeader httpHeader) {
+        return true;
     }
     
     @Override

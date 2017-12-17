@@ -7,7 +7,11 @@ package me.buhuan.ex03;
  */
 public class HttpHeader {
     
+    char[] name;
+    
     int nameEnd;
+    
+    char[] value;
     
     int valueEnd;
 }

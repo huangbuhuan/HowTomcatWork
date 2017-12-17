@@ -28,6 +28,14 @@ public class HttpRequest implements HttpServletRequest{
         this.inputStream = inputStream;
     }
     
+    public void setContentType(String contentType) {
+        
+    }
+    
+    public void setContentLength(int contentLength) {
+        
+    }
+    
     public void setQueryString(String queryString) {
         
     }
@@ -37,6 +45,10 @@ public class HttpRequest implements HttpServletRequest{
     }
     
     public void setRequestedSessionURL(boolean flag) {
+        
+    }
+    
+    public void addHeader(String name, String value) {
         
     }
     

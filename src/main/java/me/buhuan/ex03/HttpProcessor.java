@@ -18,6 +18,10 @@ public class HttpProcessor {
     
     private HttpResponse response;
     
+    private boolean available;
+    
+    private Socket socket;
+    
     public void process(Socket socket) {
         SocketInputStream input = null;
         OutputStream output = null;
@@ -109,7 +113,63 @@ public class HttpProcessor {
         return "";
     }
     
-    public void parseHeader(SocketInputStream socketInputStream) {
+    /**
+     * 解析头部
+     * @param input
+     * @throws ServletException
+     */
+    public void parseHeader(SocketInputStream input) throws ServletException {
+        while (true) {
+            HttpHeader httpHeader = new HttpHeader();
+            input.readHeader(httpHeader);
+            if (httpHeader.nameEnd == 0) {
+                if (httpHeader.valueEnd == 0) {
+                    return;
+                } else {
+                    throw new ServletException("httpProcessor.parseHeaders.colon");
+                }
+            }
+            String name = new String(httpHeader.name, 0, httpHeader.nameEnd);
+            String value = new String(httpHeader.value, 0, httpHeader.valueEnd);
+            request.addHeader(name, value);
+            if ("cookie".equals(name)) {
+                
+            } else if ("content-length".equals(name)) {
+                int n = -1;
+                try {
+                    n = Integer.parseInt(value);
+                } catch (Exception e) {
+                    throw new ServletException("httpProcessor.parseHeaders.contentLength");
+                }
+                request.setContentLength(n);
+            } else if ("content-type".equals(name)) {
+                request.setContentType(value);
+            }
+        }
         
+    }
+    
+    synchronized void assign() {
+        while (available) {
+            try { wait();
+            }
+            catch (InterruptedException e) { }
+        }
+        available = true;
+        notifyAll();
+    }
+    
+    synchronized Socket await() {
+        while (!available) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        Socket socket = this.socket;
+        available = false;
+        notifyAll();
+        return socket;
     }
 }
