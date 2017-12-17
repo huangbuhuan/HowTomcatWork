@@ -1,5 +1,3 @@
-package me.buhuan.ex02;
-
 import javax.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
