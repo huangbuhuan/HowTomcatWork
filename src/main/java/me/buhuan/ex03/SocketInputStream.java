@@ -26,7 +26,8 @@ public class SocketInputStream extends InputStream {
         return "";
     }
     
-    public String readHeader() {
+    public String readHeader(HttpHeader httpHeader) {
+        
         return "";
     }
     

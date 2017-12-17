@@ -7,7 +7,11 @@ package me.buhuan.ex03;
  */
 public class StringManager {
     
-    public StringManager getManager(String name) {
+    public static StringManager getManager(String name) {
         return new StringManager();
+    }
+    
+    public String getString(String string) {
+        return "";
     }
 }

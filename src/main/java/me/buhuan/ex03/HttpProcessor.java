@@ -54,6 +54,7 @@ public class HttpProcessor {
         } else if (requestLine.uriEnd < 1){
             throw new ServletException("Missing HTTP requesr URI");
         }
+        // 解析查询条件
         int question = requestLine.indexOf("?");
         if (question > 0) {
             request.setQueryString(new String(requestLine.uri, question + 1, requestLine.uriEnd - question - 1));
